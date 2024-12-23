@@ -1,39 +1,71 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    // Track current section and link
+    let currentSection = document.querySelector('section');
+    let currentLink = document.querySelector('.sidebar-nav a');
+
+    // Set initial active states
+    currentSection.classList.add('active');
+    currentLink.classList.add('active');
+
+    // Handle sidebar link clicks
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            const section = document.querySelector(this.getAttribute('href'));
-            section.scrollIntoView({
-                behavior: 'smooth'
-            });
 
             // Update active link
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-            });
-            this.classList.add('active');
+            document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            currentLink = link;
+
+            // Get and scroll to target section
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                // Update active section
+                document.querySelectorAll('section').forEach(s => {
+                    s.classList.remove('active');
+                    s.classList.add('inactive');
+                });
+                
+                targetSection.classList.remove('inactive');
+                targetSection.classList.add('active');
+                currentSection = targetSection;
+
+                // Smooth scroll
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
-    // Highlight active section on scroll
+    // Handle scroll
     window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-links a');
+        const scrollPos = window.scrollY;
 
-        let current = '';
+        // Find current section
+        document.querySelectorAll('section').forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
 
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.pageYOffset >= sectionTop - 60) {
-                current = section.getAttribute('id');
-            }
-        });
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                // Update active section
+                if (currentSection !== section) {
+                    document.querySelectorAll('section').forEach(s => {
+                        s.classList.remove('active');
+                        s.classList.add('inactive');
+                    });
+                    section.classList.remove('inactive');
+                    section.classList.add('active');
+                    currentSection = section;
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').substring(1) === current) {
-                link.classList.add('active');
+                    // Update active link
+                    const correspondingLink = document.querySelector(`.sidebar-nav a[href="#${section.id}"]`);
+                    if (correspondingLink && correspondingLink !== currentLink) {
+                        document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+                        correspondingLink.classList.add('active');
+                        currentLink = correspondingLink;
+                    }
+                }
             }
         });
     });
