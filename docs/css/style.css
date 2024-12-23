@@ -100,21 +100,40 @@ section.inactive {
     transform: translateX(-20px);
 }
 
+section ul {
+    padding-left: 2.5rem;
+}
+
 h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #4a90e2;
+    text-shadow: 0 0 20px rgba(74, 144, 226, 0.1);
 }
 
 h3 {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
     color: #63b3ed;
+    text-shadow: 0 0 15px rgba(99, 179, 237, 0.1);
 }
 
 p {
     margin-bottom: 1rem;
     color: #a0aec0;
+    line-height: 1.8;
+}
+
+a {
+    color: #63b3ed;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px dotted #4a90e2;
+}
+
+a:hover {
+    color: #4a90e2;
+    border-bottom-style: solid;
 }
 
 .code-block {
@@ -125,6 +144,7 @@ p {
     border: 1px solid #1a2332;
     position: relative;
     overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .code-block::before {
@@ -144,6 +164,8 @@ pre {
 code {
     font-family: 'Fira Code', monospace;
     color: #63b3ed;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
 }
 
 @media (max-width: 768px) {
@@ -245,11 +267,13 @@ code {
     border-radius: 12px;
     border: 1px solid #1a2332;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .feature-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.1);
+    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.2);
+    border-color: #4a90e2;
 }
 
 /* Tokenomics Grid */
@@ -300,12 +324,15 @@ code {
     text-decoration: none;
     border: 1px solid #1a2332;
     transition: all 0.3s ease;
+    border-bottom: none;
 }
 
 .social-links a:hover {
     background: #162234;
     transform: translateY(-2px);
-} 
+    border-color: #4a90e2;
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+}
 
 /* Smooth Scrolling */
 html {
@@ -426,6 +453,7 @@ html {
     margin-top: 2rem;
     padding: 1rem 0;
     color: #a0aec0;
+    border-top: 1px solid rgba(26, 35, 50, 0.5);
 }
 
 .disclaimer-link {
@@ -433,10 +461,12 @@ html {
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.9rem;
+    border-bottom: none;
 }
 
 .disclaimer-link:hover {
     color: #4a90e2;
+    text-shadow: 0 0 10px rgba(74, 144, 226, 0.2);
 }
 
 .separator {
@@ -453,5 +483,26 @@ html {
     .disclaimer-box {
         padding: 1.5rem;
     }
+}
+
+/* Additional Info Section */
+.additional-info {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(12, 22, 37, 0.3);
+    border-radius: 12px;
+    border: 1px solid #1a2332;
+}
+
+.additional-info p {
+    margin-bottom: 0.75rem;
+}
+
+.additional-info p:last-child {
+    margin-bottom: 0;
+}
+
+.additional-info strong {
+    color: #63b3ed;
 }
  
