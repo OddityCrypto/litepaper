@@ -494,6 +494,10 @@ html {
     border: 1px solid #1a2332;
 }
 
+.contract-basics h3 {
+    margin-top: 0;
+}
+
 .additional-info p {
     margin-bottom: 0.75rem;
 }
